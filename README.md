@@ -24,6 +24,11 @@ sdkmanager "platforms;android-27" "platforms;android-30" "platforms;android-36"
 
 sdkmanager "build-tools;27.0.3" "build-tools;30.0.3" "build-tools;36.0.0"
 
+echo $ANDROID_SDK_ROOT
+
+nano local.properties 
+
+sdk.dir=/media/vaganov/44FE3B91FE3B79EE/AndroidSDK to "sdk.dir=your Android SDK($ANDROID_SDK_ROOT)"
 
 
 ---
