@@ -1,5 +1,4 @@
 # Permissions Engine Toolkit - Usage Guide
-dododod Vibe :D
 You need install OpenJDK 17 + SdkManager 
 
 sudo apt install -y unzip wget openjdk-17-jdk
@@ -28,10 +27,7 @@ sdkmanager "build-tools;27.0.3" "build-tools;30.0.3" "build-tools;36.0.0"
 
 
 ---
-
-## Introduction
-
-Permissions Engine Toolkit is a modular system for managing Android permissions. It automatically handles permission requests, checks status, and manages the permission flow.
+ 
 
 ### Supported Permissions:
 - **ACCESSIBILITY** - Accessibility service
@@ -71,24 +67,8 @@ libpermission/build/outputs/aar/
 ```
 
 ### Add to Project
-
-Add the AAR file to your project's `build.gradle.kts`:
-
-```kotlin
-dependencies {
-    implementation(files("path/to/libpermission-release.aar"))
-}
-```
-
-**Example with relative path:**
-```kotlin
-dependencies {
-    implementation(files("../libpermission/build/outputs/aar/libpermission-release.aar"))
-}
-```
-
-**Example with absolute path:**
-```kotlin
+ 
+```kotlin Kts Gradle
 dependencies {
     implementation(files("/home/user/libs/libpermission-release.aar"))
 }
@@ -138,9 +118,7 @@ protected void onDestroy() {
 
 ---
 
-## Basic Usage
-
-### Initialization
+ 
 ```java
 public class MainActivity extends Activity {
     private Engine permissionEngine;
@@ -152,8 +130,7 @@ public class MainActivity extends Activity {
     }
 }
 ```
-
-### Set Permission Order
+ 
 ```java
 Stage[] order = new Stage[] {
     Stage.ACCESSIBILITY,
@@ -162,27 +139,25 @@ Stage[] order = new Stage[] {
 };
 permissionEngine.setPermissionOrder(order);
 ```
-
-### Check Status
+ 
 ```java
 Status status = permissionEngine.getStatus();
 boolean allGranted = status.allGranted;
 boolean hasOverlay = status.overlay;
 ```
-
-### Start Permission Flow
+ 
 ```java
 permissionEngine.start();
 ```
 
-### Set Callbacks
+ 
 ```java
 permissionEngine.setStageCallback(Stage.OVERLAY, () -> {
     Log.d("Permissions", "Overlay requested");
 });
 ```
 
-### Set Listener
+ 
 ```java
 permissionEngine.setListener(new Listener() {
     @Override
@@ -206,80 +181,7 @@ permissionEngine.setListener(new Listener() {
     }
 });
 ```
-
----
-
-## API Reference
-
-### Engine Methods
-
-**Initialization:**
-- `Engine(Activity activity)` - Create Engine instance
-- `setPermissionOrder(Stage[] order)` - Set permission request order
-- `start()` - Start permission request flow
-- `stop()` - Stop the flow
-
-**Status:**
-- `getStatus()` - Get status of all permissions (returns `Status`)
-- `areAllGranted()` - Check if all permissions are granted
-- `getCurrentStage()` - Get current stage
-- `isComplete()` - Check if process is complete
-
-**Callbacks:**
-- `setStageCallback(Stage stage, Runnable callback)` - Set callback for specific stage
-- `setStageCallbacks(Map<Stage, Runnable> callbacks)` - Set multiple callbacks
-
-**Listeners:**
-- `setListener(Listener listener)` - Set event listener
-
-**Activity Integration:**
-- `onResume()` - Call in `Activity.onResume()`
-- `onPause()` - Call in `Activity.onPause()`
-- `onActivityResult(int requestCode, int resultCode, Intent data)` - Call in `Activity.onActivityResult()`
-- `onDestroy()` - Call in `Activity.onDestroy()`
-
-### Stage Enum
-```java
-public enum Stage {
-    ACCESSIBILITY,
-    OVERLAY,
-    MANAGE_STORAGE,
-    BATTERY_OPTIMIZATIONS,
-    CHANGE_SMS_MANAGER,
-    COMPLETE
-}
-```
-
-### Status Class
-```java
-public class Status {
-    public final boolean accessibility;
-    public final boolean overlay;
-    public final boolean needManageStorage;
-    public final boolean batteryOptimizations;
-    public final boolean sms;
-    public final boolean allGranted;
-    
-    public int getGrantedCount();
-    public int getTotalCount();
-}
-```
-
-### Listener Interface
-```java
-public interface Listener {
-    void onPermissionGranted(Stage stage);
-    void onPermissionDenied(Stage stage);
-    void onAllPermissionsGranted();
-    void onStageChanged(Stage currentStage);
-}
-```
-
----
-
-## Examples
-
-### Example 1: Basic Setup
+ 
 ```java
 public class MainActivity extends Activity {
     private Engine permissionEngine;
@@ -323,7 +225,7 @@ public class MainActivity extends Activity {
 }
 ```
 
-### Example 2: Check Before Request
+ 
 ```java
 public void requestOverlayIfNeeded() {
     if (!permissionEngine.getStatus().overlay) {
@@ -334,8 +236,7 @@ public void requestOverlayIfNeeded() {
     }
 }
 ```
-
-### Example 3: Using Listener
+ 
 ```java
 permissionEngine.setListener(new Listener() {
     @Override
@@ -364,19 +265,3 @@ permissionEngine.setListener(new Listener() {
 });
 ```
 
----
-
-## Important Notes
-
-1. **Always call lifecycle methods:**
-   - `onResume()` in `Activity.onResume()`
-   - `onActivityResult()` in `Activity.onActivityResult()`
-   - `onDestroy()` in `Activity.onDestroy()`
-
-2. **Permission order:**
-   - Set order via `setPermissionOrder()` before `start()`
-   - Default order is used if not set
-
-3. **Callbacks:**
-   - Callbacks are invoked after permission request
-   - Use `getStatus()` to check already granted permissions
