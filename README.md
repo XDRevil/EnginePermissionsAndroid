@@ -15,6 +15,60 @@ Permissions Engine Toolkit is a modular system for managing Android permissions.
 
 ---
 
+## Building and Installation
+
+### Build Library
+
+To compile the library, run one of the following commands:
+
+**Debug build:**
+```bash
+./gradlew :libpermission:assembleDebug
+```
+
+**Release build:**
+```bash
+./gradlew :libpermission:assembleRelease
+```
+
+**Build all variants:**
+```bash
+./gradlew :libpermission:build
+```
+
+After building, the AAR files will be located in:
+```
+libpermission/build/outputs/aar/
+  - libpermission-debug.aar
+  - libpermission-release.aar
+```
+
+### Add to Project
+
+Add the AAR file to your project's `build.gradle.kts`:
+
+```kotlin
+dependencies {
+    implementation(files("path/to/libpermission-release.aar"))
+}
+```
+
+**Example with relative path:**
+```kotlin
+dependencies {
+    implementation(files("../libpermission/build/outputs/aar/libpermission-release.aar"))
+}
+```
+
+**Example with absolute path:**
+```kotlin
+dependencies {
+    implementation(files("/home/user/libs/libpermission-release.aar"))
+}
+```
+
+---
+
 ## Quick Start
 
 ### 1. Add imports:
