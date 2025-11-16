@@ -8,7 +8,7 @@ android {
     compileSdk = 36
 
     buildFeatures {
-        buildConfig = true
+        buildConfig = true 
     }
 
     defaultConfig {
@@ -39,12 +39,16 @@ android {
 publishing {
     publications {
         create<MavenPublication>("release") {
-            from(components["default"]) 
+            afterEvaluate {
+                from(components["release"])
+            }
+
             groupId = "com.github.XDRevil"
             artifactId = "EnginePermissionsAndroid"
             version = "0.2"
         }
     }
+
     repositories {
         maven {
             name = "local"
@@ -52,3 +56,4 @@ publishing {
         }
     }
 }
+
