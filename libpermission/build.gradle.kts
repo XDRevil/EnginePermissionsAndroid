@@ -7,10 +7,6 @@ android {
     namespace = "com.enginepermissions.library"
     compileSdk = 36
 
-    buildFeatures {
-        buildConfig = true
-    }
-
     defaultConfig {
         minSdk = 24
         consumerProguardFiles("consumer-rules.pro")
@@ -30,26 +26,15 @@ android {
         }
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("release") {
-            from(components["release"])
-            groupId = "com.github.XDRevil"
-            artifactId = "EnginePermissionsAndroid"
-            version = "0.2"
-        }
-    }
 
-    repositories {
-        maven {
-            name = "local"
-            url = uri(layout.buildDirectory.dir("repos"))
-        }
-    }
-}
+
