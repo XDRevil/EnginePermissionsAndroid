@@ -39,7 +39,7 @@ android {
 publishing {
     publications {
         create<MavenPublication>("release") {
-            from(components["release"])
+            from(components["default"]) 
             groupId = "com.github.XDRevil"
             artifactId = "EnginePermissionsAndroid"
             version = "0.2"
