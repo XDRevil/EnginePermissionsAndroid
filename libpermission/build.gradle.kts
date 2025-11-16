@@ -7,6 +7,10 @@ android {
     namespace = "com.enginepermissions.library"
     compileSdk = 36
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         minSdk = 24
         consumerProguardFiles("consumer-rules.pro")
@@ -16,7 +20,6 @@ android {
         debug {
             isMinifyEnabled = false
         }
-
         release {
             isMinifyEnabled = true
             proguardFiles(
@@ -31,26 +34,21 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components.findByName("release") ?: throw GradleException("Component 'release' not found"))
-                groupId = "com.github.XDRevil"
-                artifactId = "EnginePermissionsAndroid"
-                version = "0.2"
-            }
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            from(components["release"])
+            groupId = "com.github.XDRevil"
+            artifactId = "EnginePermissionsAndroid"
+            version = "0.2"
         }
-
-        repositories {
-            maven {
-                name = "local"
-                url = uri("$buildDir/repos")
-            }
+    }
+    repositories {
+        maven {
+            name = "local"
+            url = uri(layout.buildDirectory.dir("repos"))
         }
     }
 }
-
