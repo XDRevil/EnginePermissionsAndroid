@@ -1,35 +1,8 @@
 # Permissions Engine Toolkit - Usage Guide
-You need install OpenJDK 17 + SdkManager 
 
-sudo apt install -y unzip wget openjdk-17-jdk
-echo $HOME 
-
-
-mkdir -p $HOME/AndroidManagerCMD/cmdline-tools
-cd $HOME/AndroidManagerCMD/cmdline-tools
-wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip
-unzip cmdline-tools.zip
-rm cmdline-tools.zip
-mv cmdline-tools latest
-
-export ANDROID_SDK_ROOT=$HOME/AndroidManagerCMD
-export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
-export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-
-source ~/.bashrc
-sdkmanager --list
-sdkmanager --licenses
-
-sdkmanager "platforms;android-27" "platforms;android-30" "platforms;android-36"
-
-sdkmanager "build-tools;27.0.3" "build-tools;30.0.3" "build-tools;36.0.0"
-
-echo $ANDROID_SDK_ROOT
-
-nano local.properties 
-
-sdk.dir=/media/vaganov/44FE3B91FE3B79EE/AndroidSDK to "sdk.dir=your Android SDK($ANDROID_SDK_ROOT)"
-
+``` JitPack (To Install)
+https://jitpack.io/#XDRevil/EnginePermissionsAndroid
+```
 
 ---
  
