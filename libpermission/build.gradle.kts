@@ -1,12 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
+    id("maven-publish")  
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
     namespace = "com.enginepermissions.library"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 24
@@ -22,8 +22,23 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+
+                groupId = "com.github.XDRevil"
+                artifactId = "EnginePermissionsAndroid"
+                version = "0.1"  
+            }
+        }
     }
 }
