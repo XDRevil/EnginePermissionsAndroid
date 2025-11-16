@@ -1,8 +1,5 @@
 # Permissions Engine Toolkit - Usage Guide
-
-``` JitPack (To Install)
-https://jitpack.io/#XDRevil/EnginePermissionsAndroid
-```
+ 
 
 ---
  
