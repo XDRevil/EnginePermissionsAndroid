@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.library)
+    id("com.android.library")
     id("maven-publish")
 }
 
@@ -8,7 +8,7 @@ android {
     compileSdk = 36
 
     buildFeatures {
-        buildConfig = true 
+        buildConfig = true
     }
 
     defaultConfig {
@@ -39,10 +39,7 @@ android {
 publishing {
     publications {
         create<MavenPublication>("release") {
-            afterEvaluate {
-                from(components["release"])
-            }
-
+            from(components["release"])
             groupId = "com.github.XDRevil"
             artifactId = "EnginePermissionsAndroid"
             version = "0.2"
@@ -56,4 +53,3 @@ publishing {
         }
     }
 }
-
