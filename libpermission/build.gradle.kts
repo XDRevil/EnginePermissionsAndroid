@@ -37,7 +37,7 @@ afterEvaluate {
 
                 groupId = "com.github.XDRevil"
                 artifactId = "EnginePermissionsAndroid"
-                version = "0.1"  
+                version = "0.2"  
             }
         }
     }
